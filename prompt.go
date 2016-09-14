@@ -18,28 +18,28 @@ func New() Prompt {
 	}
 }
 
-func (p *Prompt) Scan(n string) string {
+func (p Prompt) Scan(n string) string {
 	fmt.Print(n, " ")
 	p.scanner.Scan()
 	return p.scanner.Text()
 }
 
-func (p *Prompt) ScanInt(n string) int {
+func (p Prompt) ScanInt(n string) (int, error) {
 	s := p.Scan(n)
-	i, err := strconv.Atoi(s)
+	return strconv.Atoi(s)
+	/*i, err := strconv.Atoi(s)
 	if err != nil {
-		fmt.Println("Not a valid number", s, err)
-		return 0
+		return 0, err
 	}
-	return i
+	return i, nil*/
 }
 
-func (p *Prompt) ScanFloat64(n string) float64 {
+func (p Prompt) ScanFloat64(n string) (float64, error) {
 	s := p.Scan(n)
-	f, err := strconv.ParseFloat(s, 64)
+	return strconv.ParseFloat(s, 64)
+	/*f, err := strconv.ParseFloat(s, 64)
 	if err != nil {
-		fmt.Println("Please input valid number", s, err)
-		return 0.0
+		return 0.0,err
 	}
-	return f
+	return f, nil*/
 }
